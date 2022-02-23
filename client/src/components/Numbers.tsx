@@ -6,6 +6,7 @@ import classname from 'classnames';
 import { ListItems } from './ListItems';
 import Select from 'react-select';
 import { FixedBottom } from './FixedBottom';
+import ReactPaginate from 'react-paginate';
 
 export const Numbers = () => {
   const [page, setPage] = React.useState<number>(1);
@@ -52,16 +53,32 @@ export const Numbers = () => {
   return (
     <div className={classname('relative', style.component)}>
       <div className={style.componentContainer}>
-        <ListItems items={users} loading={loading} total={total} />
-      </div>
-      <FixedBottom>
-        <div style={{ width: '300px' }} className="mx-auto">
+        <div style={{ width: '300px', marginBottom: '20px' }}>
           <Select
             options={handleTotal()}
             onChange={(e) => setPage(e ? Number(e.value) : 1)}
             value={{ label: page, value: page }}
             isSearchable
             className="customSelect"
+          />
+        </div>
+        <ListItems items={users} loading={loading} total={total} />
+      </div>
+      <FixedBottom>
+        <div className={style.reactPaginate}>
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={(val: any) => {
+              const cal = val.selected + 1;
+              setPage(cal);
+              setLoading(true);
+            }}
+            pageRangeDisplayed={5}
+            pageCount={total && Number(total / limit)}
+            previousLabel="<"
+            renderOnZeroPageCount={null}
+            activeClassName={style.selected}
           />
         </div>
       </FixedBottom>

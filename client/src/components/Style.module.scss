@@ -40,5 +40,25 @@
 }
 .fixedBottom {
   border-top: 1px solid #f8f8f8;
-  padding: 5px;
+  padding: 10px;
+}
+.reactPaginate {
+  width: 500px;
+  margin: auto;
+  ul {
+    display: flex;
+  }
+  li {
+    padding: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    width: 40px;
+    height: 30px;
+    text-align: center;
+  }
+  .selected{
+   background: black;
+    color: white;
+    border-radius: 20px;
+  }
 }
