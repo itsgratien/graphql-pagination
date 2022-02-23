@@ -11,10 +11,13 @@ export const typeDefs = gql`
 
   type GetUserResponse{
     data: [User!]!
+    page: Int
+    total: Int
+    offset: Int
   }
 
   type Query {
     greeting: String
-    getAllUser(offset: Int!, limit: Int!): GetUserResponse
+    getAllUser(page: Int!, limit: Int!): GetUserResponse
   }
 `;

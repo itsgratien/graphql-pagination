@@ -12,6 +12,6 @@ export interface TUserModel extends TUser {
 }
 
 export interface TGetUserArgs{
-  offset: number;
+  page: number;
   limit: number;
 }

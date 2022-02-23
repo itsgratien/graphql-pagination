@@ -6,10 +6,16 @@ export const greeting = () => 'hello world';
 
 export const getAllUser = async (_root: any, args: TGetUserArgs) => {
   try {
-    const { offset, limit } = args;
+    const { page, limit } = args;
     const count = await userModel.count();
 
-    const getUsers = await userModel.find({}).limit(limit);
+    const offset = page > 0 ? (page - 1) * limit : 1;
+
+    const getUsers = await userModel
+      .find({})
+      .limit(limit)
+      .skip(offset)
+      .sort({ createdAt: 1 });
 
     return {
       data: getUsers.map((item) => ({
@@ -19,6 +25,9 @@ export const getAllUser = async (_root: any, args: TGetUserArgs) => {
         createdAt: item.createdAt,
         updatedAt: item.updatedAt,
       })),
+      page,
+      total: count,
+      offset,
     };
   } catch (error: any) {
     return new ApolloError(
