@@ -9,7 +9,7 @@ export const getAllUser = async (_root: any, args: TGetUserArgs) => {
     const { page, limit } = args;
     const count = await userModel.count();
 
-    const offset = page > 0 ? (page - 1) * limit : 1;
+    const offset = page > 0 ? (page - 1) * limit : 0;
 
     const getUsers = await userModel
       .find({})
