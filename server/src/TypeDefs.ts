@@ -5,9 +5,16 @@ export const typeDefs = gql`
     name: String!
     id: String!
     email: String!
+    createdAt: String!
+    updatedAt: String!
+  }
+
+  type GetUserResponse{
+    data: [User!]!
   }
 
   type Query {
     greeting: String
+    getAllUser(offset: Int!, limit: Int!): GetUserResponse
   }
 `;

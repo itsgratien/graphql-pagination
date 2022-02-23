@@ -2,7 +2,7 @@ import 'module-alias/register';
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import { makeExecutableSchema } from '@graphql-tools/schema';
-import { dbConnect } from '~src/Config';
+import { dbConnect, addUsers } from '~src/Config';
 import { createServer } from 'http';
 import { typeDefs } from '~src/TypeDefs';
 import { resolvers } from '~src/Resolver';
@@ -22,6 +22,8 @@ const startServer = async () => {
   apolloServer.applyMiddleware({ app });
 
   await dbConnect();
+
+  // await addUsers();
 
   await new Promise<void>((resolve) =>
     httpServer.listen({ port: 4000 }, resolve)
