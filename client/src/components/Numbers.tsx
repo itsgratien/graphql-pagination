@@ -38,7 +38,7 @@ export const Numbers = () => {
   }
   return (
     <div className={classname('relative', style.component)}>
-      <ListItems items={users} loading={loading} />
+      <ListItems items={users} loading={loading} total={total} />
     </div>
   );
 };
