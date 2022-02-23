@@ -19,14 +19,26 @@
   }
 }
 
-.component{
+.component {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  height: 100vh;
+  width: 100%;
+  margin: auto;
+}
+.componentContainer {
   width: 500px;
   margin: auto;
-  padding-top: 50px;
 }
-.listItem{
+.listItem {
   border: 1px solid #f8f8f8;
   padding: 10px 20px;
   border-radius: 10px;
   margin: 10px 0px;
+}
+.fixedBottom {
+  border-top: 1px solid #f8f8f8;
+  padding: 5px;
 }

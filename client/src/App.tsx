@@ -1,6 +1,4 @@
 import React from 'react';
-import style from './App.module.scss';
-import classname from 'classnames';
 import {
   BrowserRouter,
   Route,
@@ -11,19 +9,14 @@ import { RoutePaths } from 'utils';
 
 const App = () => {
   return (
-    <div className={classname('container mx-auto', style.app)}>
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path={RoutePaths.Home} element={<Numbers />} />
-          <Route path={RoutePaths.LoadMore} element={<LoadMore />} />
-          <Route
-            path={RoutePaths.InfiniteScroll}
-            element={<InfiniteScroll />}
-          />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path={RoutePaths.Home} element={<Numbers />} />
+        <Route path={RoutePaths.LoadMore} element={<LoadMore />} />
+        <Route path={RoutePaths.InfiniteScroll} element={<InfiniteScroll />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

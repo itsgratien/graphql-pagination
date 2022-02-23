@@ -26,7 +26,7 @@ export const Header = () => {
   }, [location]);
 
   return (
-    <div className={style.lists}>
+    <div className={classname(style.lists, 'fixed left-0 right-0 top-0 z-40 bg-white')}>
       <ul className={classname('flex items-center justify-center')}>
         <li
           className={classname(
@@ -40,7 +40,7 @@ export const Header = () => {
             activeLi === RoutePaths.LoadMore ? style.active : ''
           )}
         >
-          <Link to={RoutePaths.LoadMore}>Load more</Link>
+          <Link to={RoutePaths.LoadMore}>fetch more</Link>
         </li>
         <li
           className={classname(
