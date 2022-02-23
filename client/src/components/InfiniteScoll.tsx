@@ -7,5 +7,5 @@ type Props = {};
 export const InfiniteScroll = (props: Props) => {
   // const [] = React.useState();
   // const { } = useLazyQuery(Types.GET_ALL_USER_GQL);
-  return <div>Numbers</div>;
+  return <div>Infinite scrolling</div>;
 };

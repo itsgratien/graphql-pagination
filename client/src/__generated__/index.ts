@@ -23,3 +23,16 @@ export const GET_ALL_USER_GQL = gql`
     }
   }
 `;
+
+export interface TGetAllUserResponse {
+  getAllUser: {
+    data: TUser[];
+    page?: number;
+    total?: number;
+  };
+}
+
+export interface TGetAllUserVariable{
+  page: number;
+  limit: number;
+}
