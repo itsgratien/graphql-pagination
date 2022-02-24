@@ -7,22 +7,24 @@ import { ListItems } from './ListItems';
 import Scroll from 'react-infinite-scroller';
 
 export const InfiniteScroll = () => {
+  const pageStart = 1;
+
   const limit = 10;
 
   const { fetchMore, data } = useQuery<
-    Types.TFetchMoreResponse,
+    Types.TLoadUsersInfinitelyResponse,
     Types.TGetAllUserVariable
-  >(Types.FETCH_MORE_USER_GQL, {
-    variables: { limit, page: 1 },
+  >(Types.LOAD_USER_INFINITE_GQL, {
+    variables: { limit, page: pageStart }
   });
 
   const handleFetchMore = (val: number) => {
-    if (data && data.fetchMoreUser && data.fetchMoreUser.page) {
+    if (data && data.loadUsersInfinitely && data.loadUsersInfinitely.page) {
       fetchMore({ variables: { page: val, limit } });
     }
   };
 
-  if (!data || !data.fetchMoreUser) {
+  if (!data || !data.loadUsersInfinitely) {
     return null;
   }
 
@@ -32,7 +34,10 @@ export const InfiniteScroll = () => {
         <Scroll
           pageStart={0}
           loadMore={handleFetchMore}
-          hasMore={data.fetchMoreUser.data.length !== data.fetchMoreUser.total}
+          hasMore={
+            data.loadUsersInfinitely.data.length !==
+            data.loadUsersInfinitely.total
+          }
           loader={
             <div className="loader" key={0}>
               Loading ...
@@ -41,8 +46,8 @@ export const InfiniteScroll = () => {
           useWindow={false}
         >
           <ListItems
-            items={data.fetchMoreUser.data}
-            total={data.fetchMoreUser.total}
+            items={data.loadUsersInfinitely.data}
+            total={data.loadUsersInfinitely.total}
           />
         </Scroll>
       </div>

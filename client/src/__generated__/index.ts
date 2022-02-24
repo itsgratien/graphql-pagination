@@ -41,6 +41,23 @@ export const FETCH_MORE_USER_GQL = gql`
   }
 `;
 
+export const LOAD_USER_INFINITE_GQL = gql`
+  query LoadUsersInfinite($page: Int!, $limit: Int!) {
+    loadUsersInfinitely(page: $page, limit: $limit) {
+      data {
+        id
+        name
+        email
+        createdAt
+        updatedAt
+      }
+      page
+      total
+      offset
+    }
+  }
+`;
+
 interface TGetAllUser {
   data: TUser[];
   page?: number;
@@ -57,4 +74,8 @@ export interface TGetAllUserVariable {
 
 export interface TFetchMoreResponse {
   fetchMoreUser: TGetAllUser;
+}
+
+export interface TLoadUsersInfinitelyResponse {
+  loadUsersInfinitely: TGetAllUser;
 }

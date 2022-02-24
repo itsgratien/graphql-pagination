@@ -46,3 +46,12 @@ export const fetchMoreUser = async (_root: any, args: TGetUserArgs) => {
   }
 };
 
+export const loadUsersInfinitely = async (_root: any, args: TGetUserArgs) => {
+  try {
+    return getUsersFunc(args);
+  } catch (error: any) {
+    return new ApolloError(
+      `Unable to fetch data due to internal server error. ${error.message}`
+    );
+  }
+};

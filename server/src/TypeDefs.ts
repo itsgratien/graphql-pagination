@@ -20,5 +20,6 @@ export const typeDefs = gql`
     greeting: String
     getAllUser(page: Int!, limit: Int!): GetUserResponse
     fetchMoreUser(page: Int!, limit: Int!): GetUserResponse
+    loadUsersInfinitely(page: Int!, limit: Int!): GetUserResponse
   }
 `;
