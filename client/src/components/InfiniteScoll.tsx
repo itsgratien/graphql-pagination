@@ -14,7 +14,7 @@ export const InfiniteScroll = () => {
 
   const [total, setTotal] = React.useState<number>();
 
-  const limit = 8;
+  const limit = 10;
 
   const { fetchMore } = useQuery<
     Types.TGetAllUserResponse,
@@ -38,7 +38,9 @@ export const InfiniteScroll = () => {
   }
   return (
     <div className={classname('relative', style.component)}>
-      <ListItems items={users} loading={loading} total={total} />
+      <div className={style.componentContainer}>
+        <ListItems items={users} loading={loading} total={total} />
+      </div>
     </div>
   );
 };

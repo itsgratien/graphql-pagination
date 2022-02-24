@@ -12,14 +12,13 @@ export const apolloClient = new ApolloClient({
               if (!existing) {
                 return incoming;
               }
-              console.log('exsit', incoming);
 
               const merged = existing.data.slice(0) || [];
 
               const incomingData = incoming.data || [];
 
-              for (let i = 0; i < incomingData.length; i++){
-                 merged[incoming.offset + i] = incomingData[i]
+              for (let i = 0; i < incomingData.length; i++) {
+                merged[incoming.offset + i] = incomingData[i];
               }
               const d = {
                 page: incoming.page,
