@@ -10,11 +10,7 @@ const getUsersFunc = async (args: TGetUserArgs) => {
 
   const offset = page > 0 ? (page - 1) * limit : 0;
 
-  const getUsers = await userModel
-    .find({})
-    .limit(limit)
-    .skip(offset)
-    .sort({ createdAt: 1 });
+  const getUsers = await userModel.find({}).limit(limit).skip(offset);
 
   return {
     data: getUsers.map((item) => ({

@@ -16,8 +16,8 @@ export const LoadMore = () => {
 
   const limit = 8;
 
-  const { fetchMore } = useQuery<
-    any,
+  const { fetchMore, data } = useQuery<
+    Types.TFetchMoreResponse,
     Types.TGetAllUserVariable
   >(Types.FETCH_MORE_USER_GQL, {
     variables: { limit, page },
@@ -34,18 +34,20 @@ export const LoadMore = () => {
   });
 
   const handleFetchMore = () => {
-    const nextPage = page + 1;
-    fetchMore({ variables: { page: nextPage, limit } });
-    setPage(nextPage);
+    if (data && data.fetchMoreUser && data.fetchMoreUser.page) {
+      const nextPage = data.fetchMoreUser.page + 1;
+      fetchMore({ variables: { page: nextPage, limit } });
+      // setPage(nextPage);
+    }
   };
 
-  if (!users) {
+  if (!data  || !data.fetchMoreUser) {
     return null;
   }
   return (
     <div className={classname('relative', style.component)}>
       <div className={style.componentContainer}>
-        <ListItems items={users} loading={loading} total={total} />
+        <ListItems items={data.fetchMoreUser.data} loading={loading} total={total} />
         <div>
           <button
             type="button"

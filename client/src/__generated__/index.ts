@@ -36,6 +36,7 @@ export const FETCH_MORE_USER_GQL = gql`
       }
       page
       total
+      offset
     }
   }
 `;

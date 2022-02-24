@@ -8,18 +8,24 @@ export const apolloClient = new ApolloClient({
         fields: {
           fetchMoreUser: {
             keyArgs: false,
-            merge: (existing, incoming, options) => {
+            merge: (existing, incoming) => {
               if (!existing) {
                 return incoming;
               }
-              const { args }: any = options;
-              
-              const page = args.page || 1;
+              console.log('exsit', incoming);
 
-              const existingData = existing.data || [];
+              const merged = existing.data.slice(0) || [];
+
+              const incomingData = incoming.data || [];
+
+              for (let i = 0; i < incomingData.length; i++){
+                 merged[incoming.offset + i] = incomingData[i]
+              }
               const d = {
-                ...incoming,
-                data: [...existingData, ...incoming.data],
+                page: incoming.page,
+                offset: incoming.offset,
+                total: incoming.total,
+                data: merged,
               };
               return d;
             },

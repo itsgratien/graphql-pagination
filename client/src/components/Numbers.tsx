@@ -65,22 +65,23 @@ export const Numbers = () => {
         <ListItems items={users} loading={loading} total={total} />
       </div>
       <FixedBottom>
-        <div className={style.reactPaginate}>
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel=">"
-            onPageChange={(val: any) => {
-              const cal = val.selected + 1;
-              setPage(cal);
-              setLoading(true);
-            }}
-            pageRangeDisplayed={5}
-            pageCount={total && Number(total / limit)}
-            previousLabel="<"
-            renderOnZeroPageCount={null}
-            activeClassName={style.selected}
-          />
-        </div>
+        {total && (
+          <div className={style.reactPaginate}>
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel=">"
+              onPageChange={(val: any) => {
+                const cal = val.selected + 1;
+                setPage(cal);
+                setLoading(true);
+              }}
+              pageRangeDisplayed={5}
+              pageCount={Number(total / limit)}
+              previousLabel="<"
+              activeClassName={style.selected}
+            />
+          </div>
+        )}
       </FixedBottom>
     </div>
   );
