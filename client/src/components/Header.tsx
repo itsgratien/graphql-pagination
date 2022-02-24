@@ -26,7 +26,7 @@ export const Header = () => {
   }, [location]);
 
   return (
-    <div className={classname(style.lists, 'fixed left-0 right-0 top-0 z-40 bg-white')}>
+    <div className={classname(style.lists, 'fixed left-0 right-0 top-0 z-40 bg-black')}>
       <ul className={classname('flex items-center justify-center')}>
         <li
           className={classname(

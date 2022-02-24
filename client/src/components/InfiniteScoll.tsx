@@ -39,7 +39,11 @@ export const InfiniteScroll = () => {
             data.loadUsersInfinitely.total
           }
           loader={
-            <div className="loader" key={0}>
+            <div
+              className="loader text-sm font-bold"
+              key={0}
+              style={{ color: '#fba200' }}
+            >
               Loading ...
             </div>
           }

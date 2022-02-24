@@ -18,4 +18,9 @@ code {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  background-color: black;
+}
+.css-1s2u09g-control {
+  background: black !important;
+  border-color: #181818 !important;
 }

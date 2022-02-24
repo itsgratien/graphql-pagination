@@ -10,7 +10,7 @@ export const LoadMore = () => {
 
   const [disable, setDisable] = React.useState<boolean>(false);
 
-  const limit = 10;
+  const limit = 7;
 
   const { fetchMore, data } = useQuery<
     Types.TFetchMoreResponse,
@@ -67,11 +67,12 @@ export const LoadMore = () => {
           <button
             type="button"
             className={classname(
-              'outline-none focus:outline-none bg-black text-white p-3 font-bold rounded-full text-xs',
+              'outline-none focus:outline-none text-white p-3 font-bold rounded-full text-xs',
               disable ? 'opacity-20' : 'opacity-100'
             )}
             onClick={handleFetchMore}
             disabled={disable}
+            style={{ backgroundColor: '#fba200' }}
           >
             Load more
           </button>

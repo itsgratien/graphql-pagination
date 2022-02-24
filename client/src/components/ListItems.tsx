@@ -16,7 +16,7 @@ export const ListItems = ({ items, loading, total }: Props) => {
     <>
       {loading && <small className="text-xs">Loading ...</small>}
       <div>
-        <small>
+        <small style={{ color: '#fba200' }}>
           <b>{total}</b> results
         </small>
       </div>
