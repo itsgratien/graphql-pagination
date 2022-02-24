@@ -55,8 +55,6 @@ export const LoadMore = () => {
     return null;
   }
 
-  console.log('sh', disable);
-
   return (
     <div className={classname('relative', style.component)}>
       <div className={style.componentContainer}>

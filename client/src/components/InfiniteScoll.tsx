@@ -4,42 +4,47 @@ import * as Types from '__generated__';
 import style from './Style.module.scss';
 import classname from 'classnames';
 import { ListItems } from './ListItems';
+import Scroll from 'react-infinite-scroller';
 
 export const InfiniteScroll = () => {
-  const [page, setPage] = React.useState<number>(1);
-
-  const [users, setUsers] = React.useState<Types.TUser[]>();
-
-  const [loading, setLoading] = React.useState<boolean>(true);
-
-  const [total, setTotal] = React.useState<number>();
-
   const limit = 10;
 
-  const { fetchMore } = useQuery<
-    Types.TGetAllUserResponse,
+  const { fetchMore, data } = useQuery<
+    Types.TFetchMoreResponse,
     Types.TGetAllUserVariable
-  >(Types.GET_ALL_USER_GQL, {
-    variables: { limit, page },
-    onCompleted: (res) => {
-      if (res.getAllUser) {
-        setUsers(res.getAllUser.data);
-        setTotal(res.getAllUser.total);
-        setLoading(false);
-      }
-    },
-    onError: () => {
-      setLoading(false);
-    },
+  >(Types.FETCH_MORE_USER_GQL, {
+    variables: { limit, page: 1 },
   });
 
-  if (!users) {
+  const handleFetchMore = (val: number) => {
+    if (data && data.fetchMoreUser && data.fetchMoreUser.page) {
+      fetchMore({ variables: { page: val, limit } });
+    }
+  };
+
+  if (!data || !data.fetchMoreUser) {
     return null;
   }
+
   return (
     <div className={classname('relative', style.component)}>
       <div className={style.componentContainer}>
-        <ListItems items={users} loading={loading} total={total} />
+        <Scroll
+          pageStart={0}
+          loadMore={handleFetchMore}
+          hasMore={data.fetchMoreUser.data.length !== data.fetchMoreUser.total}
+          loader={
+            <div className="loader" key={0}>
+              Loading ...
+            </div>
+          }
+          useWindow={false}
+        >
+          <ListItems
+            items={data.fetchMoreUser.data}
+            total={data.fetchMoreUser.total}
+          />
+        </Scroll>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ export const typeDefs = gql`
     updatedAt: String!
   }
 
-  type GetUserResponse{
+  type GetUserResponse {
     data: [User!]!
     page: Int
     total: Int

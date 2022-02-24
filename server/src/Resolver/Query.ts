@@ -45,3 +45,4 @@ export const fetchMoreUser = async (_root: any, args: TGetUserArgs) => {
     );
   }
 };
+
