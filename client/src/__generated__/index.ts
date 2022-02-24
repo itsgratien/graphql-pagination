@@ -24,15 +24,36 @@ export const GET_ALL_USER_GQL = gql`
   }
 `;
 
+export const FETCH_MORE_USER_GQL = gql`
+  query FetchMoreUser($page: Int!, $limit: Int!) {
+    fetchMoreUser(page: $page, limit: $limit) {
+      data {
+        id
+        name
+        email
+        createdAt
+        updatedAt
+      }
+      page
+      total
+    }
+  }
+`;
+
+interface TGetAllUser {
+  data: TUser[];
+  page?: number;
+  total?: number;
+}
 export interface TGetAllUserResponse {
-  getAllUser: {
-    data: TUser[];
-    page?: number;
-    total?: number;
-  };
+  getAllUser: TGetAllUser;
 }
 
-export interface TGetAllUserVariable{
+export interface TGetAllUserVariable {
   page: number;
   limit: number;
+}
+
+export interface TFetchMoreResponse {
+  fetchMoreUser: TGetAllUser;
 }

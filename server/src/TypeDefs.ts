@@ -19,5 +19,6 @@ export const typeDefs = gql`
   type Query {
     greeting: String
     getAllUser(page: Int!, limit: Int!): GetUserResponse
+    fetchMoreUser(page: Int!, limit: Int!): GetUserResponse
   }
 `;

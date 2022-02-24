@@ -17,14 +17,14 @@ export const LoadMore = () => {
   const limit = 8;
 
   const { fetchMore } = useQuery<
-    Types.TGetAllUserResponse,
+    any,
     Types.TGetAllUserVariable
-  >(Types.GET_ALL_USER_GQL, {
+  >(Types.FETCH_MORE_USER_GQL, {
     variables: { limit, page },
     onCompleted: (res) => {
-      if (res.getAllUser) {
-        setUsers(res.getAllUser.data);
-        setTotal(res.getAllUser.total);
+      if (res.fetchMoreUser) {
+        setUsers(res.fetchMoreUser.data);
+        setTotal(res.fetchMoreUser.total);
         setLoading(false);
       }
     },
@@ -33,12 +33,31 @@ export const LoadMore = () => {
     },
   });
 
+  const handleFetchMore = () => {
+    const nextPage = page + 1;
+    fetchMore({ variables: { page: nextPage, limit } });
+    setPage(nextPage);
+  };
+
   if (!users) {
     return null;
   }
   return (
     <div className={classname('relative', style.component)}>
-      <ListItems items={users} loading={loading} total={total} />
+      <div className={style.componentContainer}>
+        <ListItems items={users} loading={loading} total={total} />
+        <div>
+          <button
+            type="button"
+            className={classname(
+              'outline-none focus:outline-none bg-black text-white p-3 font-bold rounded-full text-xs'
+            )}
+            onClick={handleFetchMore}
+          >
+            Load more
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
