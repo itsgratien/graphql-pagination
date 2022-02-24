@@ -58,10 +58,11 @@ export const LOAD_USER_INFINITE_GQL = gql`
   }
 `;
 
-interface TGetAllUser {
+export interface TGetAllUser {
   data: TUser[];
   page?: number;
   total?: number;
+  offset: number;
 }
 export interface TGetAllUserResponse {
   getAllUser: TGetAllUser;

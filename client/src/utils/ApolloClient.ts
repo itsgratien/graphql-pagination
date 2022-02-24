@@ -1,6 +1,7 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
+import * as Types from '__generated__';
 
-const mergeFunc = (existing: any, incoming: any) => {
+const mergeFunc = (existing: Types.TGetAllUser, incoming: Types.TGetAllUser) => {
   if (!existing) {
     return incoming;
   }
