@@ -6,25 +6,17 @@ import classname from 'classnames';
 import { ListItems } from './ListItems';
 
 export const LoadMore = () => {
-  const [page, setPage] = React.useState<number>(1);
-
-  const [users, setUsers] = React.useState<Types.TUser[]>();
-
   const [loading, setLoading] = React.useState<boolean>(true);
 
-  const [total, setTotal] = React.useState<number>();
-
-  const limit = 8;
+  const limit = 10;
 
   const { fetchMore, data } = useQuery<
     Types.TFetchMoreResponse,
     Types.TGetAllUserVariable
   >(Types.FETCH_MORE_USER_GQL, {
-    variables: { limit, page },
+    variables: { limit, page: 1 },
     onCompleted: (res) => {
       if (res.fetchMoreUser) {
-        setUsers(res.fetchMoreUser.data);
-        setTotal(res.fetchMoreUser.total);
         setLoading(false);
       }
     },
@@ -37,7 +29,6 @@ export const LoadMore = () => {
     if (data && data.fetchMoreUser && data.fetchMoreUser.page) {
       const nextPage = data.fetchMoreUser.page + 1;
       fetchMore({ variables: { page: nextPage, limit } });
-      // setPage(nextPage);
     }
   };
 
@@ -47,7 +38,7 @@ export const LoadMore = () => {
   return (
     <div className={classname('relative', style.component)}>
       <div className={style.componentContainer}>
-        <ListItems items={data.fetchMoreUser.data} loading={loading} total={total} />
+        <ListItems items={data.fetchMoreUser.data} loading={loading} total={data.fetchMoreUser.total} />
         <div>
           <button
             type="button"

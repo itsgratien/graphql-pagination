@@ -11,13 +11,30 @@ import ReactPaginate from 'react-paginate';
 export const Numbers = () => {
   const [page, setPage] = React.useState<number>(1);
 
-  const [users, setUsers] = React.useState<Types.TUser[]>();
-
   const [loading, setLoading] = React.useState<boolean>(true);
+
+  const [users, setUsers] = React.useState<Types.TUser[]>();
 
   const [total, setTotal] = React.useState<number>();
 
   const limit = 10;
+
+  useQuery<
+    Types.TGetAllUserResponse,
+    Types.TGetAllUserVariable
+  >(Types.GET_ALL_USER_GQL, {
+    variables: { limit, page },
+    onCompleted: (res) => {
+      if (res.getAllUser) {
+        setLoading(false);
+        setUsers(res.getAllUser.data);
+        setTotal(res.getAllUser.total);
+      }
+    },
+    onError: () => {
+      setLoading(false);
+    },
+  });
 
   const handleTotal = () => {
     const num = [];
@@ -28,23 +45,6 @@ export const Numbers = () => {
     }
     return num;
   };
-
-  useQuery<Types.TGetAllUserResponse, Types.TGetAllUserVariable>(
-    Types.GET_ALL_USER_GQL,
-    {
-      variables: { limit, page },
-      onCompleted: (res) => {
-        if (res.getAllUser) {
-          setUsers(res.getAllUser.data);
-          setTotal(res.getAllUser.total);
-          setLoading(false);
-        }
-      },
-      onError: () => {
-        setLoading(false);
-      },
-    }
-  );
 
   if (!users) {
     return null;
@@ -62,7 +62,11 @@ export const Numbers = () => {
             className="customSelect"
           />
         </div>
-        <ListItems items={users} loading={loading} total={total} />
+        <ListItems
+          items={users}
+          loading={loading}
+          total={total}
+        />
       </div>
       <FixedBottom>
         {total && (
