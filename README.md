@@ -17,6 +17,14 @@ Those ways are the following:
 
 ## Images (pages)
 ### /
+![home](https://raw.githubusercontent.com/itsgratien/graphql-pagination/main/client/public/1.png)
+
+### /load-more
+![home](https://raw.githubusercontent.com/itsgratien/graphql-pagination/main/client/public/2.png)
+
+### /infinite-scroll
+![home](https://raw.githubusercontent.com/itsgratien/graphql-pagination/main/client/public/3.png)
+
 ## Technology used
 - [NodeJS](https://nodejs.org)
 - [MongoDB](https://docs.mongodb.com/manual/)
