@@ -1,5 +1,5 @@
 # graphql-pagination
-This repo includes three (3) different ways of implementing pagination using graphql (Apollo)
+This repo includes three (3) different ways of implementing pagination using graphql (Apollo Server & Apollo client)
 
 Those ways are the following:
 - Using [infinite scroll](https://www.npmjs.com/package/react-infinite-scroller)
